@@ -7,7 +7,9 @@ for running a Minecraft server in a [dyno](https://devcenter.heroku.com/articles
 
 ## Usage
 
-Create a [free ngrok account](https://ngrok.com/) and copy your Auth token. Then create a new Git project with a `eula.txt` file:
+Create a [free ngrok account](https://ngrok.com/) and copy your Auth token. Then create a [free zerotier account](https://my.zerotier.com/login) and network.
+
+Then create a new Git project with a `eula.txt` file:
 
 ```sh-session
 $ echo 'eula=true' > eula.txt
@@ -88,12 +90,20 @@ You can customize ngrok by setting the `NGROK_OPTS` config variable. For example
 $ heroku config:set NGROK_OPTS="--remote-addr 1.tcp.ngrok.io:25565"
 ```
 
+### zerotier
+
+By default this will join dapla.net's client network (192.168.192.0/24). One can choose their own network by setting the `ZEROTIER_NETWORK` config varable. For example:
+
+```
+$ heroku config:set ZEROTIER_NETWORK="<18 char network id hash>"
+```
+
 ### Minecraft
 
 You can choose the Minecraft version by setting the MINECRAFT_VERSION like so:
 
 ```
-$ heroku config:set MINECRAFT_VERSION="1.8.3"
+$ heroku config:set MINECRAFT_VERSION="1.14.2"
 ```
 
 You can also configure the server properties by creating a `server.properties`
